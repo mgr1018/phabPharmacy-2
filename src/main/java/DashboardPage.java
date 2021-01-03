@@ -13,6 +13,7 @@ public class DashboardPage {
     Icon login = new ImageIcon("Icons/login.png");
     Icon map = new ImageIcon("Icons/map.png");
     Icon onlineOrder = new ImageIcon("Icons/onlineorder.png");
+    Icon profit = new ImageIcon("Icons/profit.png");
     // Labels
     JLabel currentUserLabel = new JLabel("Logged in as: ");
     JLabel currentUser = new JLabel();
@@ -23,6 +24,7 @@ public class DashboardPage {
     JButton pointOfSaleBttn =  new JButton("Point of Sale",pos);
     JButton onlineOrdersBttn = new JButton("Online Orders",onlineOrder);
     JButton findProdInStoreBttn = new JButton("Find Product in Store",map);
+    JButton dailyProfitsBttn = new JButton("Daily Profits",profit);
     JButton logInPageBttn = new JButton("Log Out/Switch User",login);
 
     DashboardPage(){
@@ -63,10 +65,10 @@ public class DashboardPage {
 // Adding buttons
         JPanel bttnPanel = new JPanel();
         bttnPanel.setBackground(white);
-        bttnPanel.setBounds(217,165,366,260);
-        bttnPanel.setLayout(new GridLayout(4,1,5,10));
+        bttnPanel.setBounds(217,155,366,280);
+        bttnPanel.setLayout(new GridLayout(5,1,5,10));
 
-        JButton[] bttnArray = {pointOfSaleBttn,onlineOrdersBttn,findProdInStoreBttn,logInPageBttn};
+        JButton[] bttnArray = {pointOfSaleBttn,onlineOrdersBttn,findProdInStoreBttn,dailyProfitsBttn,logInPageBttn};
         for(int i=0;i<bttnArray.length;i++){
             bttnArray[i].setContentAreaFilled(true);
             bttnArray[i].setBorderPainted(false);
@@ -124,6 +126,15 @@ public class DashboardPage {
                 InteractiveMap interactiveMap = new InteractiveMap();
                 interactiveMap.branchName.setText(branchName.getText());
                 interactiveMap.currentUser.setText(currentUser.getText());
+                frame.setVisible(false);
+            }
+        });
+        dailyProfitsBttn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DailyProfits dailyProfits = new DailyProfits();
+                dailyProfits.branchName.setText(branchName.getText());
+                dailyProfits.currentUser.setText(currentUser.getText());
                 frame.setVisible(false);
             }
         });
