@@ -3,10 +3,13 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
+import java.util.*;
+import java.util.List;
 
 import static java.awt.Color.lightGray;
 import static java.awt.Color.white;
@@ -60,12 +63,14 @@ public class PointOfSalePage {
         mainPanel.setLayout(null);
 
 // Current Sale Products Table set-up
-        JTable currentSaleProducts = new JTable(0,5);
+        //JTable currentSaleProducts = new JTable(0,5);
+        DefaultTableModel tableModel = new DefaultTableModel();
+        JTable currentSaleProducts = new JTable(tableModel);
+        tableModel.addColumn("Brand");
+        tableModel.addColumn("Product");
+        tableModel.addColumn("Quantity");
+        tableModel.addColumn("Total");
 
-        String[] columnNames = {"Barcode","Brand","Product","Quantity","Total"};
-        for(int i=0; i<currentSaleProducts.getColumnCount() ; i++){
-            currentSaleProducts.getColumnModel().getColumn(i).setHeaderValue(columnNames[i]);
-        }
         currentSaleProducts.setShowGrid(false);
         currentSaleProducts.setShowHorizontalLines(false);
         currentSaleProducts.setShowVerticalLines(false);
@@ -125,6 +130,23 @@ public class PointOfSalePage {
         barcodeSrchPnl.add(searchBarcode);
 
         mainPanel.add(barcodeSrchPnl);
+        searchBarcode.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                long value = (long)productBarcode.getValue();
+                int id = (int)value;
+                ReturnDetails details = new ReturnDetails(id);
+                System.out.println(details.name);
+                System.out.println(id);
+                productName.setText(details.name);
+                brandName.setText(details.brand);
+                saleLimit.setText(details.saleLimit);
+                unitPrice.setText(Float.toString(details.unitPrice));
+                totalDose.setText(details.amount);
+            }
+        });
+
+
 
 // Adding the quantity spinner
         JPanel reqQuantity = new JPanel();
@@ -157,6 +179,28 @@ public class PointOfSalePage {
         }
 
         mainPanel.add(actionButtons);
+        List<Product> products = new ArrayList<>();
+        addToSale.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(purchaseQuantity.getValue());
+                products.add(new Product(productName.getText(), brandName.getText(), Float.parseFloat(unitPrice.getText()), (int)purchaseQuantity.getValue()));
+                tableModel.insertRow(tableModel.getRowCount(), new Object[] {productName.getText(), brandName.getText(),String.valueOf(purchaseQuantity.getValue()),String.valueOf((int)purchaseQuantity.getValue()*Float.parseFloat(unitPrice.getText()))});
+            }
+        });
+
+        finishSale.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(purchaseQuantity.getValue());
+                for(int i = 0; i<products.size(); i++){
+                    String name = "'" + products.get(i).name + "'";
+                    String brand = "'" + products.get(i).brand + "'";
+                    int change = -products.get(i).quantity;
+                    UpdateQuant query = new UpdateQuant(name, brand, change);
+                }
+            }
+        });
 
 // Current User Details
         JPanel crrntUserDet = new JPanel();
