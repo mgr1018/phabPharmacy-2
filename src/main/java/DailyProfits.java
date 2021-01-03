@@ -14,6 +14,9 @@ public class DailyProfits {
     JLabel currentUser = new JLabel();
     JLabel branchNameLabel = new JLabel("Branch: ");
     JLabel branchName = new JLabel();
+    JLabel dailyProfitLbl = new JLabel("Today's Daily Profit:");
+    JLabel currencyGBP = new JLabel("GBP");
+    JLabel dailyProfit = new JLabel("0.00");
     // Buttons
     JButton toDashboardPage = new JButton("Back to Home",home);
 
@@ -56,6 +59,44 @@ public class DailyProfits {
         }
 
         mainPanel.add(crrntUserDet);
+
+// Total Cost of Sale
+        JPanel dailyProfitPnl = new JPanel();
+        dailyProfitPnl.setBackground(white);
+        dailyProfitPnl.setBounds(95,70,600,70);
+
+        currencyGBP.setFont(new Font(null,Font.BOLD,39));
+        currencyGBP.setForeground(new Color(118,27,38));
+        dailyProfitLbl.setFont(new Font(null,Font.BOLD,40));
+        dailyProfitLbl.setForeground(new Color(54,58,101));
+        dailyProfit.setFont(new Font(null,Font.BOLD,40));
+        dailyProfit.setForeground(new Color(118,27,38));
+
+        dailyProfitPnl.add(dailyProfitLbl);
+        dailyProfitPnl.add(currencyGBP);
+        dailyProfitPnl.add(dailyProfit);
+
+        mainPanel.add(dailyProfitPnl);
+
+// Previous days profits table
+        JTable previousProfits = new JTable(0,2);
+        String[] columnNames = {"Date","Daily Profit on Date"};
+        for(int i=0; i<previousProfits.getColumnCount() ; i++){
+            previousProfits.getColumnModel().getColumn(i).setHeaderValue(columnNames[i]);
+        }
+        previousProfits.setShowGrid(false);
+        previousProfits.setShowHorizontalLines(false);
+        previousProfits.setShowVerticalLines(false);
+        previousProfits.getTableHeader().setBackground(new Color(173,216,232));
+        previousProfits.getTableHeader().setBorder(BorderFactory.createLineBorder(new Color(173,216,232)));
+
+
+        JScrollPane tabScrPne = new JScrollPane(previousProfits);
+        tabScrPne.setBounds(95,160,600,270);
+        tabScrPne.getViewport().setBackground(white);
+        tabScrPne.setBorder(BorderFactory.createLineBorder(new Color(189, 210, 231)));
+
+        mainPanel.add(tabScrPne);
 
 // Initialising frame
         JFrame frame = new JFrame("Phab Pharmacies - Find in Store");
