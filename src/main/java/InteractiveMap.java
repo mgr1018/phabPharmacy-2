@@ -39,7 +39,7 @@ public class InteractiveMap {
     JButton toDashboardPage = new JButton("Back to Home",home);
 
     InteractiveMap(){
-        // Initialising main panel
+// Initialising main panel
         JPanel mainPanel = new JPanel();
         mainPanel.setPreferredSize(new Dimension(800,500));
         mainPanel.setLayout(null);

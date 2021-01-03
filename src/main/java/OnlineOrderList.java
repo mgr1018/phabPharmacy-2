@@ -7,21 +7,24 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.CompoundBorder;
-import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseListener;
 import static java.awt.Color.lightGray;
 import static java.awt.Color.white;
-import static java.lang.StrictMath.round;
+
 
 public class OnlineOrderList {
     // Icons
     Icon home = new ImageIcon("Icons/home.png");
     Icon checklist = new ImageIcon("Icons/checklist.png");
+
     Icon map = new ImageIcon("Icons/map.png");
+    Icon aMap = new ImageIcon("Maps/a-map.png");
+    Icon bMap = new ImageIcon("Maps/b-map.png");
+    Icon cMap = new ImageIcon("Maps/c-map.png");
+    Icon dMap = new ImageIcon("Maps/d-map.png");
+    Icon eMap = new ImageIcon("Maps/e-map.png");
+    Icon fMap = new ImageIcon("Maps/f-map.png");
     // Buttons
     JButton toDashboardPage = new JButton("Back to Home",home);
     // Labels
@@ -245,6 +248,36 @@ public class OnlineOrderList {
 
         frame.setVisible(true);
         frame.setResizable(false);
+
+// THIS IS THE BIT THAT I ADDED. IT READS THE DRUG CATEGORY AND OPENS UP THE CORRESPONDING MAP FOR THAT SECTION
+// WHEN THE FIND IN STORE BUTTON IS CLICKED
+        findInStore.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] sectionNames = {"First Aid","Skincare","Headaches and Pain Relief","Digestion","Allergies","Cold and Flu"};
+                Icon[] allMaps = {aMap,bMap,cMap,dMap,eMap,fMap};
+                for(int i=0;i<allMaps.length;i++){
+                    if(productDetailVal[4].getText() == sectionNames[i]){
+                        JPanel mapPanel = new JPanel();
+                        mapPanel.add(new JLabel(allMaps[i]));
+                        mapPanel.setBounds(0,0,350,450);
+
+                        JFrame mapFrame = new JFrame("Product Location");
+                        mapFrame.setSize(350,450);
+                        mapFrame.setLocationRelativeTo(null);
+                        mapFrame.setLayout(new BorderLayout());
+
+                        mapPanel.setBackground(white);
+                        mapFrame.setBackground(white);
+                        mapFrame.add(mapPanel, BorderLayout.CENTER);
+                        mapFrame.setVisible(true);
+                        mapFrame.setResizable(false);
+                    }
+                }
+            }
+        });
+// END OF THE FUNCTIONS FOR THE FIND IN STORE BUTTON. YOU MAY JUST ADD THE CODE ENCLOSED BETWEEN THESE COMMENTS
+// TO THE FINAL VERSION OF THIS PAGE.
 
         toDashboardPage.addActionListener(new ActionListener() {
             @Override
