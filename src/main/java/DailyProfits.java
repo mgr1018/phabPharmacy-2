@@ -1,7 +1,18 @@
+import ServletCommunications.CheckProfit;
+
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static java.awt.Color.lightGray;
 import static java.awt.Color.white;
@@ -9,6 +20,7 @@ import static java.awt.Color.white;
 public class DailyProfits {
     // Icons
     Icon home = new ImageIcon("Icons/home.png");
+    Icon search = new ImageIcon("Icons/search.png");
     // Labels
     JLabel currentUserLabel = new JLabel("Logged in as: ");
     JLabel currentUser = new JLabel();
@@ -17,6 +29,9 @@ public class DailyProfits {
     JLabel dailyProfitLbl = new JLabel("Today's Daily Profit:");
     JLabel currencyGBP = new JLabel("GBP");
     JLabel dailyProfit = new JLabel("0.00");
+    JButton searchDate = new JButton(search);
+    JFormattedTextField date = new JFormattedTextField(createFormatter("####-##-##"));
+
     // Buttons
     JButton toDashboardPage = new JButton("Back to Home",home);
 
@@ -74,16 +89,58 @@ public class DailyProfits {
 
         dailyProfitPnl.add(dailyProfitLbl);
         dailyProfitPnl.add(currencyGBP);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDate = new Date();
+        System.out.println(dateFormat.format(currentDate));
+        CheckProfit query0 = new CheckProfit("'" + currentDate + "'");
+        dailyProfit.setText(String.valueOf(query0.profit));
         dailyProfitPnl.add(dailyProfit);
 
         mainPanel.add(dailyProfitPnl);
 
+        JPanel dateSearch = new JPanel();
+        dateSearch.setBackground(white);
+
+        Border titBorderCodeSrch = BorderFactory.createTitledBorder(null,"Add date (yyyy-mm-dd)", TitledBorder.DEFAULT_JUSTIFICATION,TitledBorder.DEFAULT_POSITION,new Font(null,Font.BOLD,14));
+        dateSearch.setBorder(new CompoundBorder(titBorderCodeSrch,new EmptyBorder(0,0,0,0)));
+        dateSearch.setVisible(true);
+        dateSearch.setBounds(100,180,330,70);
+
+        searchDate.setBorderPainted(false);
+        searchDate.setFocusPainted(false);
+        searchDate.setContentAreaFilled(true);
+        searchDate.setBackground(Color.lightGray);
+
+        searchDate.setPreferredSize(new Dimension(25,25));
+        date.setPreferredSize(new Dimension(165,25));
+
+        //dateSearch.add(productBarcodeLabel);
+        dateSearch.add(date);
+        dateSearch.add(searchDate);
+
+        mainPanel.add(dateSearch);
+
 // Previous days profits table
-        JTable previousProfits = new JTable(0,2);
-        String[] columnNames = {"Date","Daily Profit on Date"};
-        for(int i=0; i<previousProfits.getColumnCount() ; i++){
-            previousProfits.getColumnModel().getColumn(i).setHeaderValue(columnNames[i]);
-        }
+        DefaultTableModel tableModel = new DefaultTableModel();
+        JTable previousProfits = new JTable(tableModel);
+        tableModel.addColumn("Date");
+        tableModel.addColumn("Profit");
+        tableModel.insertRow(tableModel.getRowCount(), new Object[] {dateFormat.format(currentDate), query0.profit});
+        searchDate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CheckProfit query = new CheckProfit("'" + date.getText() + "'");
+                tableModel.insertRow(tableModel.getRowCount(), new Object[] {date.getText(), query.getProfit()});
+                System.out.println(date.getText());
+            }
+        });
+
+
+        //JTable previousProfits = new JTable(0,2);
+       // String[] columnNames = {"Date","Daily Profit on Date"};
+       // for(int i=0; i<previousProfits.getColumnCount() ; i++){
+       //     previousProfits.getColumnModel().getColumn(i).setHeaderValue(columnNames[i]);
+       // }
         previousProfits.setShowGrid(false);
         previousProfits.setShowHorizontalLines(false);
         previousProfits.setShowVerticalLines(false);
@@ -92,7 +149,7 @@ public class DailyProfits {
 
 
         JScrollPane tabScrPne = new JScrollPane(previousProfits);
-        tabScrPne.setBounds(95,160,600,270);
+        tabScrPne.setBounds(95,260,600,100);
         tabScrPne.getViewport().setBackground(white);
         tabScrPne.setBorder(BorderFactory.createLineBorder(new Color(189, 210, 231)));
 
@@ -122,5 +179,15 @@ public class DailyProfits {
                 frame.setVisible(false);
             }
         });
+    }
+    protected MaskFormatter createFormatter(String s) {
+        MaskFormatter formatter = null;
+        try {
+            formatter = new MaskFormatter(s);
+        } catch (java.text.ParseException exc) {
+            System.err.println("formatter is bad: " + exc.getMessage());
+            System.exit(-1);
+        }
+        return formatter;
     }
 }

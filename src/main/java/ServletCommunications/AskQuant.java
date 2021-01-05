@@ -1,4 +1,4 @@
-import com.google.gson.Gson;
+package ServletCommunications;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -7,16 +7,13 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-public class UpdateQuant {
-    public UpdateQuant(String name, String brand, int change){
-        Product p = new Product(name, brand, change);
-        Gson gson = new Gson();
-        String jsonString = gson.toJson(p);
-        String message = jsonString;
+public class AskQuant {
+    public AskQuant(String name){
+        String message = name;
         byte[] body = message.getBytes(StandardCharsets.UTF_8);
         URL myURL = null;
         try {
-            myURL = new URL("https://phabbackend.herokuapp.com/update");
+            myURL = new URL("https://phabbackend.herokuapp.com/access");
             HttpURLConnection conn = null;
             conn = (HttpURLConnection) myURL.openConnection();
 // Set up the header

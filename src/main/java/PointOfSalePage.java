@@ -1,3 +1,6 @@
+import ServletCommunications.ReturnDetails;
+import ServletCommunications.UpdateQuant;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
@@ -136,13 +139,11 @@ public class PointOfSalePage {
                 long value = (long)productBarcode.getValue();
                 int id = (int)value;
                 ReturnDetails details = new ReturnDetails(id);
-                System.out.println(details.name);
-                System.out.println(id);
-                productName.setText(details.name);
-                brandName.setText(details.brand);
-                saleLimit.setText(details.saleLimit);
-                unitPrice.setText(Float.toString(details.unitPrice));
-                totalDose.setText(details.amount);
+                productName.setText(details.getName());
+                brandName.setText(details.getBrand());
+                saleLimit.setText(details.getSaleLimit());
+                unitPrice.setText(Float.toString(details.getUnitPrice()));
+                totalDose.setText(details.getAmount());
             }
         });
 
@@ -186,6 +187,8 @@ public class PointOfSalePage {
                 System.out.println(purchaseQuantity.getValue());
                 products.add(new Product(productName.getText(), brandName.getText(), Float.parseFloat(unitPrice.getText()), (int)purchaseQuantity.getValue()));
                 tableModel.insertRow(tableModel.getRowCount(), new Object[] {productName.getText(), brandName.getText(),String.valueOf(purchaseQuantity.getValue()),String.valueOf((int)purchaseQuantity.getValue()*Float.parseFloat(unitPrice.getText()))});
+                float total = Float.parseFloat(saleTotal.getText()) + (int)purchaseQuantity.getValue()*Float.parseFloat(unitPrice.getText());
+                saleTotal.setText(String.valueOf(total));
             }
         });
 
@@ -260,6 +263,8 @@ public class PointOfSalePage {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
+        Image icon = Toolkit.getDefaultToolkit().getImage("C:\\Users\\craig\\Documents\\PRG3\\UI\\Icons\\home.png");
+        frame.setIconImage(icon);
 
         mainPanel.setBackground(white);
         frame.setBackground(white);

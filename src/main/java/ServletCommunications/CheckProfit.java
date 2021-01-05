@@ -1,4 +1,4 @@
-import com.google.gson.Gson;
+package ServletCommunications;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -7,18 +7,14 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-public class ReturnDetails {
-    public String name;
-    public String brand;
-    String saleLimit;
-    float unitPrice;
-    public String amount;
-    public ReturnDetails(int id){
-        String message = String.valueOf(id);
+public class CheckProfit {
+    public float profit;
+    public CheckProfit(String date){
+        String message = date;
         byte[] body = message.getBytes(StandardCharsets.UTF_8);
         URL myURL = null;
         try {
-            myURL = new URL("https://phabbackend.herokuapp.com/details");
+            myURL = new URL("https://phabbackend.herokuapp.com/accessProfit");
             HttpURLConnection conn = null;
             conn = (HttpURLConnection) myURL.openConnection();
 // Set up the header
@@ -36,14 +32,8 @@ public class ReturnDetails {
             String inputLine;
 // Read the body of the response
             while ((inputLine = bufferedReader.readLine()) != null) {
-                Gson gson = new Gson();
-                Product p=gson.fromJson(inputLine,Product.class);
-                this.name = p.name;
-                this.brand = p.brand;
-                this.saleLimit = p.saleLimit;
-                this.unitPrice = p.unitPrice;
-                this.amount = p.amount;
-                System.out.println(name);
+                System.out.println(inputLine);
+                this.profit = Float.parseFloat(inputLine);
             }
             bufferedReader.close();
 
@@ -58,5 +48,7 @@ public class ReturnDetails {
         }
 
     }
+    public float getProfit() {
+        return profit;
+    }
 }
-

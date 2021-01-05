@@ -1,3 +1,7 @@
+package ServletCommunications;
+
+import com.google.gson.Gson;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -5,14 +9,18 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-public class CheckProfit {
-    public float profit;
-    public CheckProfit(String date){
-        String message = date;
+public class ReturnDetails {
+    public String name;
+    public String brand;
+    public String saleLimit;
+    float unitPrice;
+    public String amount;
+    public ReturnDetails(int id){
+        String message = String.valueOf(id);
         byte[] body = message.getBytes(StandardCharsets.UTF_8);
         URL myURL = null;
         try {
-            myURL = new URL("https://phabbackend.herokuapp.com/accessProfit");
+            myURL = new URL("https://phabbackend.herokuapp.com/details");
             HttpURLConnection conn = null;
             conn = (HttpURLConnection) myURL.openConnection();
 // Set up the header
@@ -30,8 +38,14 @@ public class CheckProfit {
             String inputLine;
 // Read the body of the response
             while ((inputLine = bufferedReader.readLine()) != null) {
-                System.out.println(inputLine);
-                this.profit = Float.parseFloat(inputLine);
+                Gson gson = new Gson();
+                Product p=gson.fromJson(inputLine, Product.class);
+                this.name = p.name;
+                this.brand = p.brand;
+                this.saleLimit = p.saleLimit;
+                this.unitPrice = p.unitPrice;
+                this.amount = p.amount;
+                System.out.println(name);
             }
             bufferedReader.close();
 
@@ -46,4 +60,21 @@ public class CheckProfit {
         }
 
     }
+    public String getName() {
+        return name;
+    }
+    public String getBrand() {
+        return brand;
+    }
+    public String getSaleLimit() {
+        return saleLimit;
+    }
+    public float getUnitPrice() {
+        return unitPrice;
+    }
+    public String getAmount() {
+        return amount;
+    }
+
 }
+

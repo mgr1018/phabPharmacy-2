@@ -10,5 +10,6 @@ public class Main {
         LoginPage login = new LoginPage();
         //DashboardPage dashboard = new DashboardPage();
         //PointOfSalePage pointOfSale = new PointOfSalePage();
+
     }
 }

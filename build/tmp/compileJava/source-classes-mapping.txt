@@ -1,35 +1,43 @@
-AskQuant.java
- AskQuant
-InteractiveMap.java
- InteractiveMap
- InteractiveMap$1
- InteractiveMap$2
-CheckProfit.java
- CheckProfit
 Main.java
  Main
-OnlineOrderList.java
- OnlineOrderList
- OnlineOrderList$1
- OnlineOrderList$2
- OnlineOrderList$3
 LoginPage.java
  LoginPage
  LoginPage$1
  LoginPage$2
  LoginPage$3
-ReturnDetails.java
- ReturnDetails
-UpdateQuant.java
- UpdateQuant
+ServletCommunications/Product.java
+ ServletCommunications.Product
 Product.java
  Product
+InteractiveMap.java
+ InteractiveMap
+ InteractiveMap$1
+ InteractiveMap$2
+OnlineOrderList.java
+ OnlineOrderList
+ OnlineOrderList$1
+ OnlineOrderList$2
+ OnlineOrderList$3
+ OnlineOrderList$4
+ServletCommunications/UpdateQuant.java
+ ServletCommunications.UpdateQuant
+DailyProfits.java
+ DailyProfits
+ DailyProfits$1
+ DailyProfits$2
+ServletCommunications/AskQuant.java
+ ServletCommunications.AskQuant
+ServletCommunications/CheckProfit.java
+ ServletCommunications.CheckProfit
 DashboardPage.java
  DashboardPage
  DashboardPage$1
  DashboardPage$2
  DashboardPage$3
  DashboardPage$4
+ DashboardPage$5
+ServletCommunications/ReturnDetails.java
+ ServletCommunications.ReturnDetails
 PointOfSalePage.java
  PointOfSalePage
  PointOfSalePage$1
