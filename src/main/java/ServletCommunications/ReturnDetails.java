@@ -8,7 +8,9 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-
+/* This class takes the id/barcode of a product in its constructor and then makes
+* a post request to the access servlet which responds with the details of that
+* product from the database. Logs beginning with RD come from this class */
 public class ReturnDetails {
     public String name;
     public String brand;
@@ -23,6 +25,7 @@ public class ReturnDetails {
             myURL = new URL("https://phabbackend.herokuapp.com/details");
             HttpURLConnection conn = null;
             conn = (HttpURLConnection) myURL.openConnection();
+            System.out.println("RD: connection made");
 // Set up the header
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Accept", "text/html");
@@ -50,12 +53,15 @@ public class ReturnDetails {
             bufferedReader.close();
 
         } catch (MalformedURLException e) {
+            System.out.println("RD: problem with URL");
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (ProtocolException e) {
+            System.out.println("RD: protocol error, such as problem with TCP");
             e.printStackTrace();
         } catch (IOException e) {
+            System.out.println("RD: an i/o error has occured");
             e.printStackTrace();
         }
 

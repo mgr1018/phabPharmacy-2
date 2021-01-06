@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application' // Add this line
+    id 'org.gretty' version '3.0.3' // This includes a jetty webserver
 }
 application { // Add this section
     mainClassName='Main'
@@ -9,10 +10,14 @@ group 'org.example'
 version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8 // Add this line
 repositories {
-    mavenCentral()
+    jcenter() // gretty doesn't exist in mavenCentral, so use jcenter
 }
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'com.google.code.gson', name:'gson', version: '2.7'
+    // https://mvnrepository.com/artifact/org.mockito/mockito-core
+    // https://mvnrepository.com/artifact/org.hamcrest/hamcrest
+    testCompile group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '3.6.28'
 }
 

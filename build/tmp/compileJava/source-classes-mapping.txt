@@ -5,30 +5,6 @@ LoginPage.java
  LoginPage$1
  LoginPage$2
  LoginPage$3
-ServletCommunications/Product.java
- ServletCommunications.Product
-Product.java
- Product
-InteractiveMap.java
- InteractiveMap
- InteractiveMap$1
- InteractiveMap$2
-OnlineOrderList.java
- OnlineOrderList
- OnlineOrderList$1
- OnlineOrderList$2
- OnlineOrderList$3
- OnlineOrderList$4
-ServletCommunications/UpdateQuant.java
- ServletCommunications.UpdateQuant
-DailyProfits.java
- DailyProfits
- DailyProfits$1
- DailyProfits$2
-ServletCommunications/AskQuant.java
- ServletCommunications.AskQuant
-ServletCommunications/CheckProfit.java
- ServletCommunications.CheckProfit
 DashboardPage.java
  DashboardPage
  DashboardPage$1
@@ -36,11 +12,31 @@ DashboardPage.java
  DashboardPage$3
  DashboardPage$4
  DashboardPage$5
+OnlineOrderList.java
+ OnlineOrderList
+ OnlineOrderList$1
+ OnlineOrderList$2
+ OnlineOrderList$3
+ OnlineOrderList$4
+InteractiveMap.java
+ InteractiveMap
+ InteractiveMap$1
+ InteractiveMap$2
+DailyProfits.java
+ DailyProfits
+ DailyProfits$1
+ DailyProfits$2
+ServletCommunications/CheckProfit.java
+ ServletCommunications.CheckProfit
 ServletCommunications/ReturnDetails.java
  ServletCommunications.ReturnDetails
+ServletCommunications/UpdateQuant.java
+ ServletCommunications.UpdateQuant
 PointOfSalePage.java
  PointOfSalePage
  PointOfSalePage$1
  PointOfSalePage$2
  PointOfSalePage$3
  PointOfSalePage$4
+ServletCommunications/Product.java
+ ServletCommunications.Product

@@ -6,7 +6,10 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-
+/*  This class takes a date in it's constructor in order to perform the servlet
+    communication required to check the profit made at that date.
+    It makes a single post to the accessProfit servlet, the response to which
+    is the profit. Logs beginning with CP come from this class */
 public class CheckProfit {
     public float profit;
     public CheckProfit(String date){
@@ -17,6 +20,7 @@ public class CheckProfit {
             myURL = new URL("https://phabbackend.herokuapp.com/accessProfit");
             HttpURLConnection conn = null;
             conn = (HttpURLConnection) myURL.openConnection();
+            System.out.println("CP: connection made");
 // Set up the header
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Accept", "text/html");
@@ -38,12 +42,15 @@ public class CheckProfit {
             bufferedReader.close();
 
         } catch (MalformedURLException e) {
+            System.out.println("RD: problem with URL");
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (ProtocolException e) {
+            System.out.println("RD: protocol error, such as problem with TCP");
             e.printStackTrace();
         } catch (IOException e) {
+            System.out.println("RD: an i/o error has occured");
             e.printStackTrace();
         }
 

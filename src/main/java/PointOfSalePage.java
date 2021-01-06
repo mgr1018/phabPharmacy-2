@@ -1,6 +1,6 @@
 import ServletCommunications.ReturnDetails;
 import ServletCommunications.UpdateQuant;
-
+import ServletCommunications.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
@@ -184,7 +184,6 @@ public class PointOfSalePage {
         addToSale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(purchaseQuantity.getValue());
                 products.add(new Product(productName.getText(), brandName.getText(), Float.parseFloat(unitPrice.getText()), (int)purchaseQuantity.getValue()));
                 tableModel.insertRow(tableModel.getRowCount(), new Object[] {productName.getText(), brandName.getText(),String.valueOf(purchaseQuantity.getValue()),String.valueOf((int)purchaseQuantity.getValue()*Float.parseFloat(unitPrice.getText()))});
                 float total = Float.parseFloat(saleTotal.getText()) + (int)purchaseQuantity.getValue()*Float.parseFloat(unitPrice.getText());
@@ -195,11 +194,10 @@ public class PointOfSalePage {
         finishSale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(purchaseQuantity.getValue());
                 for(int i = 0; i<products.size(); i++){
-                    String name = "'" + products.get(i).name + "'";
-                    String brand = "'" + products.get(i).brand + "'";
-                    int change = -products.get(i).quantity;
+                    String name = "'" + products.get(i).getName() + "'";
+                    String brand = "'" + products.get(i).getBrand() + "'";
+                    int change = -products.get(i).getQuantity();
                     UpdateQuant query = new UpdateQuant(name, brand, change);
                 }
             }
