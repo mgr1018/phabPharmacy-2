@@ -75,7 +75,7 @@ public class DailyProfits {
 
         mainPanel.add(crrntUserDet);
 
-// Total Cost of Sale
+// Daily Profit header
         JPanel dailyProfitPnl = new JPanel();
         dailyProfitPnl.setBackground(white);
         dailyProfitPnl.setBounds(95,70,600,70);
@@ -87,9 +87,11 @@ public class DailyProfits {
         dailyProfit.setFont(new Font(null,Font.BOLD,40));
         dailyProfit.setForeground(new Color(118,27,38));
 
+// Set up daily profit inputs
         dailyProfitPnl.add(dailyProfitLbl);
         dailyProfitPnl.add(currencyGBP);
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+// Get current date and use that to call CheckProfit class to access db and find today's profit
         Date currentDate = new Date();
         System.out.println(dateFormat.format(currentDate));
         CheckProfit query0 = new CheckProfit("'" + currentDate + "'");
@@ -114,7 +116,6 @@ public class DailyProfits {
         searchDate.setPreferredSize(new Dimension(25,25));
         date.setPreferredSize(new Dimension(165,25));
 
-        //dateSearch.add(productBarcodeLabel);
         dateSearch.add(date);
         dateSearch.add(searchDate);
 
@@ -126,6 +127,8 @@ public class DailyProfits {
         tableModel.addColumn("Date");
         tableModel.addColumn("Profit");
         tableModel.insertRow(tableModel.getRowCount(), new Object[] {dateFormat.format(currentDate), query0.profit});
+
+        // Set up button to read date entered by user and make a CheckProfit query to return that days profit
         searchDate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -135,12 +138,6 @@ public class DailyProfits {
             }
         });
 
-
-        //JTable previousProfits = new JTable(0,2);
-       // String[] columnNames = {"Date","Daily Profit on Date"};
-       // for(int i=0; i<previousProfits.getColumnCount() ; i++){
-       //     previousProfits.getColumnModel().getColumn(i).setHeaderValue(columnNames[i]);
-       // }
         previousProfits.setShowGrid(false);
         previousProfits.setShowHorizontalLines(false);
         previousProfits.setShowVerticalLines(false);
@@ -180,6 +177,8 @@ public class DailyProfits {
             }
         });
     }
+// This method creates the date format mask for the user input
+// Reference 1 https://docs.oracle.com/javase/tutorial/uiswing/components/formattedtextfield.html
     protected MaskFormatter createFormatter(String s) {
         MaskFormatter formatter = null;
         try {
@@ -190,4 +189,5 @@ public class DailyProfits {
         }
         return formatter;
     }
+// end of reference 1
 }

@@ -66,7 +66,6 @@ public class PointOfSalePage {
         mainPanel.setLayout(null);
 
 // Current Sale Products Table set-up
-        //JTable currentSaleProducts = new JTable(0,5);
         DefaultTableModel tableModel = new DefaultTableModel();
         JTable currentSaleProducts = new JTable(tableModel);
         tableModel.addColumn("Brand");
@@ -133,6 +132,9 @@ public class PointOfSalePage {
         barcodeSrchPnl.add(searchBarcode);
 
         mainPanel.add(barcodeSrchPnl);
+/* Set up search button, takes id/barcode entered by user and uses ReturnDetails class to make
+call to our servlet which gets pulls values from our database and makes them accessible to us
+ */
         searchBarcode.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -178,8 +180,11 @@ public class PointOfSalePage {
             bttnArray[i].setBackground(Color.lightGray);
             actionButtons.add(bttnArray[i]);
         }
-
         mainPanel.add(actionButtons);
+/* Sets up a list which will contain the products added by the user when the add to sale button is
+pressed. Also adds these products to table to be displayed to the user. Finally the total cost of the
+product list is calculated
+ */
         List<Product> products = new ArrayList<>();
         addToSale.addActionListener(new ActionListener() {
             @Override
@@ -191,6 +196,9 @@ public class PointOfSalePage {
             }
         });
 
+/* Sets up finish sale button so that when the user presses the button, the online database is updated
+with the appropriate quantities
+ */
         finishSale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
