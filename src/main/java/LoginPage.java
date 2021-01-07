@@ -85,8 +85,7 @@ public class LoginPage {
 
         frame.setVisible(true);
         frame.setResizable(false);
-        Image icon = Toolkit.getDefaultToolkit().getImage("C:\\Users\\craig\\Documents\\PRG3\\UI\\Icons\\home.png");
-        frame.setIconImage(icon);
+
 
         paddingtonLogin.addActionListener(new ActionListener() {
             @Override

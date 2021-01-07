@@ -269,8 +269,8 @@ with the appropriate quantities
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
-        Image icon = Toolkit.getDefaultToolkit().getImage("C:\\Users\\craig\\Documents\\PRG3\\UI\\Icons\\home.png");
-        frame.setIconImage(icon);
+        //Image icon = Toolkit.getDefaultToolkit().getImage("C:\\Users\\craig\\Documents\\PRG3\\UI\\Icons\\home.png");
+        //frame.setIconImage(icon);
 
         mainPanel.setBackground(white);
         frame.setBackground(white);
