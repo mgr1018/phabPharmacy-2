@@ -13,6 +13,23 @@ ClientPages/OnlineOrderList.java
  ClientPages.OnlineOrderList$2
  ClientPages.OnlineOrderList$3
  ClientPages.OnlineOrderList$4
+ServletCommunications/UpdateQuant.java
+ ServletCommunications.UpdateQuant
+ClientPages/InteractiveMap.java
+ ClientPages.InteractiveMap
+ ClientPages.InteractiveMap$1
+ ClientPages.InteractiveMap$2
+ServletCommunications/CheckProfit.java
+ ServletCommunications.CheckProfit
+ServletCommunications/ReturnDetails.java
+ ServletCommunications.ReturnDetails
+ClientPages/PointOfSalePage.java
+ ClientPages.PointOfSalePage
+ ClientPages.PointOfSalePage$1
+ ClientPages.PointOfSalePage$2
+ ClientPages.PointOfSalePage$3
+ ClientPages.PointOfSalePage$4
+ ClientPages.PointOfSalePage$5
 ClientPages/DailyProfits.java
  ClientPages.DailyProfits
  ClientPages.DailyProfits$1
@@ -24,19 +41,3 @@ ClientPages/DashboardPage.java
  ClientPages.DashboardPage$3
  ClientPages.DashboardPage$4
  ClientPages.DashboardPage$5
-ServletCommunications/CheckProfit.java
- ServletCommunications.CheckProfit
-ServletCommunications/ReturnDetails.java
- ServletCommunications.ReturnDetails
-ServletCommunications/UpdateQuant.java
- ServletCommunications.UpdateQuant
-ClientPages/InteractiveMap.java
- ClientPages.InteractiveMap
- ClientPages.InteractiveMap$1
- ClientPages.InteractiveMap$2
-ClientPages/PointOfSalePage.java
- ClientPages.PointOfSalePage
- ClientPages.PointOfSalePage$1
- ClientPages.PointOfSalePage$2
- ClientPages.PointOfSalePage$3
- ClientPages.PointOfSalePage$4

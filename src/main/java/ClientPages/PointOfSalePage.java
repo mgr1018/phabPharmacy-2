@@ -16,6 +16,8 @@ import java.text.NumberFormat;
 import java.util.*;
 import java.util.List;
 import java.util.logging.Logger;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 import static java.awt.Color.lightGray;
 import static java.awt.Color.white;
@@ -190,17 +192,31 @@ call to our servlet which gets pulls values from our database and makes them acc
         mainPanel.add(actionButtons);
 /* Sets up a list which will contain the products added by the user when the add to sale button is
 pressed. Also adds these products to table to be displayed to the user. Finally the total cost of the
-product list is calculated
+product list is calculated. Removal button also implemented.
  */
+        DecimalFormat df = new DecimalFormat("0.00");
         List<Product> products = new ArrayList<>();
         addToSale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 products.add(new Product(productName.getText(), brandName.getText(), Float.parseFloat(unitPrice.getText()), (int)purchaseQuantity.getValue()));
-                tableModel.insertRow(tableModel.getRowCount(), new Object[] {productName.getText(), brandName.getText(),String.valueOf(purchaseQuantity.getValue()),String.valueOf((int)purchaseQuantity.getValue()*Float.parseFloat(unitPrice.getText()))});
+                String tableCost = df.format((int)purchaseQuantity.getValue()*Float.parseFloat(unitPrice.getText()));
+                tableModel.insertRow(tableModel.getRowCount(), new Object[] {productName.getText(), brandName.getText(),String.valueOf(purchaseQuantity.getValue()),tableCost});
                 float total = Float.parseFloat(saleTotal.getText()) + (int)purchaseQuantity.getValue()*Float.parseFloat(unitPrice.getText());
-                saleTotal.setText(String.valueOf(total));
+                saleTotal.setText(String.valueOf(df.format(total)));
                 log.info("Added product details to product list");
+            }
+        });
+
+        deleteFromSale.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = currentSaleProducts.getSelectedRow();
+                float sub = products.get(row).getQuantity()*products.get(row).getUnitPrice();
+                saleTotal.setText(String.valueOf(Float.parseFloat(saleTotal.getText())-sub));
+                products.remove(row);
+                tableModel.removeRow(row);
+                log.info("Removed product details from product list");
             }
         });
 
@@ -210,12 +226,16 @@ with the appropriate quantities
         finishSale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for(int i = 0; i<products.size(); i++){
+                for(int i = products.size()-1; i>-1; i--){
                     String name = "'" + products.get(i).getName() + "'";
                     String brand = "'" + products.get(i).getBrand() + "'";
                     int change = -products.get(i).getQuantity();
                     UpdateQuant query = new UpdateQuant(name, brand, change);
                     log.info("Accessed server and database to update product details");
+                    System.out.println(products.get(i).getName());
+                    products.remove(i);
+                    tableModel.setRowCount(0);
+                    saleTotal.setText("0.00");
                 }
             }
         });

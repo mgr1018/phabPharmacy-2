@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
@@ -100,8 +101,9 @@ public class DailyProfits {
 // Get current date and use that to call CheckProfit class to access db and find today's profit
         Date currentDate = new Date();
         System.out.println(dateFormat.format(currentDate));
+        DecimalFormat df = new DecimalFormat("0.00");
         CheckProfit query0 = new CheckProfit("'" + currentDate + "'");
-        dailyProfit.setText(String.valueOf(query0.profit));
+        dailyProfit.setText(df.format(query0.profit));
         dailyProfitPnl.add(dailyProfit);
 
         mainPanel.add(dailyProfitPnl);
@@ -132,14 +134,14 @@ public class DailyProfits {
         JTable previousProfits = new JTable(tableModel);
         tableModel.addColumn("Date");
         tableModel.addColumn("Profit");
-        tableModel.insertRow(tableModel.getRowCount(), new Object[] {dateFormat.format(currentDate), query0.profit});
+        tableModel.insertRow(tableModel.getRowCount(), new Object[] {dateFormat.format(currentDate), df.format(query0.profit)});
 
         // Set up button to read date entered by user and make a CheckProfit query to return that days profit
         searchDate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CheckProfit query = new CheckProfit("'" + date.getText() + "'");
-                tableModel.insertRow(tableModel.getRowCount(), new Object[] {date.getText(), query.getProfit()});
+                tableModel.insertRow(tableModel.getRowCount(), new Object[] {date.getText(), df.format(query.getProfit())});
                 System.out.println(date.getText());
                 log.info("Checked database for profit");
             }
