@@ -1,0 +1,8 @@
+Jan 08, 2021 11:12:45 AM ServletCommunications.ReturnDetails <init>
+INFO: RD: connection made
+Jan 08, 2021 11:13:01 AM ClientPages.PointOfSalePage$1 actionPerformed
+INFO: Accessed Servlet and Database for product details
+Jan 08, 2021 11:13:04 AM ClientPages.PointOfSalePage$2 actionPerformed
+INFO: Added product details to product list
+Jan 08, 2021 11:13:08 AM ServletCommunications.CheckProfit <init>
+INFO: CP: connection made

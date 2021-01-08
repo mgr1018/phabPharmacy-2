@@ -1,42 +1,42 @@
+ServletCommunications/Product.java
+ ServletCommunications.Product
 Main.java
  Main
-LoginPage.java
- LoginPage
- LoginPage$1
- LoginPage$2
- LoginPage$3
-DashboardPage.java
- DashboardPage
- DashboardPage$1
- DashboardPage$2
- DashboardPage$3
- DashboardPage$4
- DashboardPage$5
-OnlineOrderList.java
- OnlineOrderList
- OnlineOrderList$1
- OnlineOrderList$2
- OnlineOrderList$3
- OnlineOrderList$4
-InteractiveMap.java
- InteractiveMap
- InteractiveMap$1
- InteractiveMap$2
-DailyProfits.java
- DailyProfits
- DailyProfits$1
- DailyProfits$2
+ClientPages/LoginPage.java
+ ClientPages.LoginPage
+ ClientPages.LoginPage$1
+ ClientPages.LoginPage$2
+ ClientPages.LoginPage$3
+ClientPages/OnlineOrderList.java
+ ClientPages.OnlineOrderList
+ ClientPages.OnlineOrderList$1
+ ClientPages.OnlineOrderList$2
+ ClientPages.OnlineOrderList$3
+ ClientPages.OnlineOrderList$4
+ClientPages/DailyProfits.java
+ ClientPages.DailyProfits
+ ClientPages.DailyProfits$1
+ ClientPages.DailyProfits$2
+ClientPages/DashboardPage.java
+ ClientPages.DashboardPage
+ ClientPages.DashboardPage$1
+ ClientPages.DashboardPage$2
+ ClientPages.DashboardPage$3
+ ClientPages.DashboardPage$4
+ ClientPages.DashboardPage$5
 ServletCommunications/CheckProfit.java
  ServletCommunications.CheckProfit
 ServletCommunications/ReturnDetails.java
  ServletCommunications.ReturnDetails
 ServletCommunications/UpdateQuant.java
  ServletCommunications.UpdateQuant
-PointOfSalePage.java
- PointOfSalePage
- PointOfSalePage$1
- PointOfSalePage$2
- PointOfSalePage$3
- PointOfSalePage$4
-ServletCommunications/Product.java
- ServletCommunications.Product
+ClientPages/InteractiveMap.java
+ ClientPages.InteractiveMap
+ ClientPages.InteractiveMap$1
+ ClientPages.InteractiveMap$2
+ClientPages/PointOfSalePage.java
+ ClientPages.PointOfSalePage
+ ClientPages.PointOfSalePage$1
+ ClientPages.PointOfSalePage$2
+ ClientPages.PointOfSalePage$3
+ ClientPages.PointOfSalePage$4

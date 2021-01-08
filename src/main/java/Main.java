@@ -1,15 +1,16 @@
-import javax.swing.*;
-import java.awt.*;
-import java.text.NumberFormat;
+import ClientPages.LoginPage;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.logging.LogManager;
 
 public class Main {
-    static GraphicsConfiguration gc;
     public static void main(String[] args){
-        //InteractiveMap interactiveMap = new InteractiveMap();
-        //OnlineOrderList onlineOrderList = new OnlineOrderList();
+        try {
+            LogManager.getLogManager().readConfiguration(new FileInputStream("logging.properties"));
+        } catch (IOException e) {
+            System.out.println("File Logging Error");
+            e.printStackTrace();
+        }
         LoginPage login = new LoginPage();
-        //DashboardPage dashboard = new DashboardPage();
-        //PointOfSalePage pointOfSale = new PointOfSalePage();
-
     }
 }
