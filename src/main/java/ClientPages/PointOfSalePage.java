@@ -1,7 +1,6 @@
 package ClientPages;
 
 import ServletCommunications.ReturnDetails;
-import ServletCommunications.UpdateQuant;
 import ServletCommunications.*;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -16,7 +15,6 @@ import java.text.NumberFormat;
 import java.util.*;
 import java.util.List;
 import java.util.logging.Logger;
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 import static java.awt.Color.lightGray;
@@ -230,7 +228,7 @@ with the appropriate quantities
                     String name = "'" + products.get(i).getName() + "'";
                     String brand = "'" + products.get(i).getBrand() + "'";
                     int change = -products.get(i).getQuantity();
-                    UpdateQuant query = new UpdateQuant(name, brand, change);
+                    UpdateQuantity query = new UpdateQuantity(name, brand, change);
                     log.info("Accessed server and database to update product details");
                     System.out.println(products.get(i).getName());
                     products.remove(i);

@@ -26,5 +26,12 @@ public class Productv2 {
         this.price = price;
         this.amount = amount;
     }
+    public Productv2(int barcode, String brand, String name, int quantity, String category){
+        this.id = barcode;
+        this.name = name;
+        this.brand = brand;
+        this.quantity = quantity;
+        this.category = category;
+    }
 
 }
