@@ -1,11 +1,15 @@
 package ClientPages;
 
+import ServletCommunications.*;
+
+import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import javax.swing.border.CompoundBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -154,10 +158,16 @@ public class OnlineOrderList {
 
 // ****************************************TEST TEST TEST TEST*********************************************
         DefaultTableModel model = (DefaultTableModel) onlineOrderCustomers.getModel();
-        model.addRow(new Object[]{"001", "Martin", "Holloway","+44 7XXXXXXXXX","SW7 2AZ"});
-        model.addRow(new Object[]{"007", "James", "Bond","+44 7XXXXXXXXX","MI6"});
-        DefaultTableModel bModel = (DefaultTableModel) onlineOrderProducts.getModel();
-        bModel.addRow(new Object[]{"1029384756","Vicks","VapoRub","3","Cold and Flu"});
+       // CustomerListSize s1 = new CustomerListSize();
+        ReturnCustomers rc = new ReturnCustomers();
+        for (int i=1; i<=rc.getCustomers().size(); i++){
+            ReturnCustomer c = new ReturnCustomer(i);
+            model.addRow(new Object[]{c.getCID(), c.getFirstName(), c.getLastName(),c.getContactNo(),c.getPostalAddress()});
+        }
+
+        /*DefaultTableModel mode = (DefaultTableModel) onlineOrderCustomers.getModel();
+        mode.addRow(new Object[]{"001", "Martin", "Holloway","+44 7XXXXXXXXX","SW7 2AZ"});*/
+
 // ********************************************************************************************************
 // Customer Details titled border
         JPanel customerDetails = new JPanel();
@@ -178,6 +188,16 @@ public class OnlineOrderList {
                 for (int i = 0; i < customerDetailVal.length; i++) {
                     customerDetailVal[i].setFont(new Font(null,Font.PLAIN,12));
                     customerDetailVal[i].setText(model.getValueAt(aSelectedRowIndex, i).toString());
+
+                    String custid = customerDetailVal[0].getText();
+
+                    DefaultTableModel bModel = (DefaultTableModel) onlineOrderProducts.getModel();
+                    ReturnCustOrders co = new ReturnCustOrders(Integer.parseInt(custid));
+                    for (int j=1; j<=co.getCustorders().size() ; j++){
+                        ReturnOrderedProduct p = new ReturnOrderedProduct(j);
+                        bModel.addRow(new Object[]{p.getBarcode(), p.getBrand(), p.getName(),p.getQty(),p.getCategory()});
+                    }
+
                 }
             }
         });
@@ -208,6 +228,7 @@ public class OnlineOrderList {
                 for(int i=0;i<productDetailVal.length;i++) {
                     productDetailVal[i].setFont(new Font(null,Font.PLAIN,12));
                     productDetailVal[i].setText(bModel.getValueAt(bSelectedRowIndex,i).toString());
+
                 }
             }
         });
@@ -234,6 +255,19 @@ public class OnlineOrderList {
         }
 
         mainPanel.add(buttons);
+
+        checkOffProduct.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = "'" + productDetailVal[2].getText() + "'";
+                String brand = "'" + productDetailVal[1].getText() + "'";
+                int change = - Integer.parseInt(productDetailVal[3].getText());
+                    UpdateQuant query = new UpdateQuant(name, brand, change);
+                    //log.info("Accessed server and database to update product details");
+
+                //bModel.removeRow();
+            }
+        });
 
 // Initialising frame
         JFrame frame = new JFrame("Phab Pharmacies - Online Orders List");

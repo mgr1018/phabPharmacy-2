@@ -1,28 +1,32 @@
-ServletCommunications/Product.java
- ServletCommunications.Product
-Main.java
- Main
+ServletCommunications/AccessOnlineCustomer.java
+ ServletCommunications.AccessOnlineCustomer
 ClientPages/LoginPage.java
  ClientPages.LoginPage
  ClientPages.LoginPage$1
  ClientPages.LoginPage$2
  ClientPages.LoginPage$3
-ClientPages/OnlineOrderList.java
- ClientPages.OnlineOrderList
- ClientPages.OnlineOrderList$1
- ClientPages.OnlineOrderList$2
- ClientPages.OnlineOrderList$3
- ClientPages.OnlineOrderList$4
+ServletCommunications/Customer.java
+ ServletCommunications.Customer
+ServletCommunications/CustomerListSize.java
+ ServletCommunications.CustomerListSize
+ClientPages/DailyProfits.java
+ ClientPages.DailyProfits
+ ClientPages.DailyProfits$1
+ ClientPages.DailyProfits$2
+Main.java
+ Main
+ServletCommunications/CheckProfit.java
+ ServletCommunications.CheckProfit
+ServletCommunications/ReturnDetails.java
+ ServletCommunications.ReturnDetails
+ServletCommunications/Product.java
+ ServletCommunications.Product
 ServletCommunications/UpdateQuant.java
  ServletCommunications.UpdateQuant
 ClientPages/InteractiveMap.java
  ClientPages.InteractiveMap
  ClientPages.InteractiveMap$1
  ClientPages.InteractiveMap$2
-ServletCommunications/CheckProfit.java
- ServletCommunications.CheckProfit
-ServletCommunications/ReturnDetails.java
- ServletCommunications.ReturnDetails
 ClientPages/PointOfSalePage.java
  ClientPages.PointOfSalePage
  ClientPages.PointOfSalePage$1
@@ -30,10 +34,24 @@ ClientPages/PointOfSalePage.java
  ClientPages.PointOfSalePage$3
  ClientPages.PointOfSalePage$4
  ClientPages.PointOfSalePage$5
-ClientPages/DailyProfits.java
- ClientPages.DailyProfits
- ClientPages.DailyProfits$1
- ClientPages.DailyProfits$2
+ServletCommunications/ReturnCustomer.java
+ ServletCommunications.ReturnCustomer
+ServletCommunications/ReturnCustOrders.java
+ ServletCommunications.ReturnCustOrders
+ServletCommunications/Productv2.java
+ ServletCommunications.Productv2
+ServletCommunications/ReturnOrderedProduct.java
+ ServletCommunications.ReturnOrderedProduct
+ServletCommunications/ReturnCustomers.java
+ ServletCommunications.ReturnCustomers
+ClientPages/OnlineOrderList.java
+ ClientPages.OnlineOrderList
+ ClientPages.OnlineOrderList$1
+ ClientPages.OnlineOrderList$2
+ ClientPages.OnlineOrderList$3
+ ClientPages.OnlineOrderList$4
+ServletCommunications/OnlineOrdersSize.java
+ ServletCommunications.OnlineOrdersSize
 ClientPages/DashboardPage.java
  ClientPages.DashboardPage
  ClientPages.DashboardPage$1
@@ -41,3 +59,7 @@ ClientPages/DashboardPage.java
  ClientPages.DashboardPage$3
  ClientPages.DashboardPage$4
  ClientPages.DashboardPage$5
+ServletCommunications/AccessOrderedProduct.java
+ ServletCommunications.AccessOrderedProduct
+ServletCommunications/AccessCustOrders.java
+ ServletCommunications.AccessCustOrders
