@@ -33,8 +33,11 @@ public class CustomersServlet extends HttpServlet {
             Customer c = new Customer(onlineCustomer.getFirstName(),onlineCustomer.getLastName(), onlineCustomer.getPostcode(), onlineCustomer.getEmail(), onlineCustomer.getPostalAddress(), onlineCustomer.getContactNo());
             Gson gson = new Gson();
             String jsonString = gson.toJson(c);
-            resp.setContentType("application/json");
-            resp.getWriter().write(jsonString);
+            if(onlineCustomer.getPendingorder()){
+                resp.setContentType("application/json");
+                resp.getWriter().write(jsonString);
+            }
+
         }
 
     }

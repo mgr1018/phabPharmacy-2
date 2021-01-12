@@ -1,10 +1,12 @@
 package Servlets;
 
-import ServletCommunications.*;
+import AccessClasses.*;
+import ServletCommunications.DeleteOrderedProduct;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -12,7 +14,7 @@ import java.util.stream.Collectors;
 import java.lang.*;
 
 @WebServlet(urlPatterns={"/checkoff"},loadOnStartup = 1)
-public class CheckoffServlet {
+public class CheckoffServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
@@ -26,11 +28,13 @@ public class CheckoffServlet {
             IOException {
         String reqBody=req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
         Gson gson = new Gson();
-        Productv2 p=gson.fromJson(reqBody, Product.class);
+        DeleteOrderedProduct p = new DeleteOrderedProduct(reqBody);
+        /*Product p=gson.fromJson(reqBody, Product.class);
         UpdateQuantity update = new UpdateQuantity(p.name, p.brand, p.change);
         SelectProduct quantity = new SelectProduct(p.name, p.brand);
+
         resp.setContentType("text/html");
         String quant = new String(String.valueOf(quantity.quant));
-        resp.getWriter().write(quant);
+        resp.getWriter().write(quant);*/
     }
 }

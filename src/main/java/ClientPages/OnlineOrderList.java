@@ -262,7 +262,8 @@ public class OnlineOrderList {
                 String name = "'" + productDetailVal[2].getText() + "'";
                 String brand = "'" + productDetailVal[1].getText() + "'";
                 int change = - Integer.parseInt(productDetailVal[3].getText());
-                    UpdateQuantity query = new UpdateQuantity(name, brand, change);
+                    UpdateQuant query = new UpdateQuant(name, brand, change);
+                    UpdateOrderDB query2 = new UpdateOrderDB(Integer.parseInt(productDetailVal[0].getText()));
                     //log.info("Accessed server and database to update product details");
 
                 //bModel.removeRow();
