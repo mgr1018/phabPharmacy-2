@@ -165,6 +165,7 @@ public class OnlineOrderList {
             model.addRow(new Object[]{c.getCID(), c.getFirstName(), c.getLastName(),c.getContactNo(),c.getPostalAddress()});
         }
 
+
         /*DefaultTableModel mode = (DefaultTableModel) onlineOrderCustomers.getModel();
         mode.addRow(new Object[]{"001", "Martin", "Holloway","+44 7XXXXXXXXX","SW7 2AZ"});*/
 
@@ -189,18 +190,17 @@ public class OnlineOrderList {
                     customerDetailVal[i].setFont(new Font(null,Font.PLAIN,12));
                     customerDetailVal[i].setText(model.getValueAt(aSelectedRowIndex, i).toString());
 
-                    String custid = customerDetailVal[0].getText();
-
-                    DefaultTableModel bModel = (DefaultTableModel) onlineOrderProducts.getModel();
-                    ReturnCustOrders co = new ReturnCustOrders(Integer.parseInt(custid));
-                    for (int j=1; j<=co.getCustorders().size() ; j++){
-                        ReturnOrderedProduct p = new ReturnOrderedProduct(j);
-                        bModel.addRow(new Object[]{p.getBarcode(), p.getBrand(), p.getName(),p.getQty(),p.getCategory()});
-                    }
-
                 }
             }
         });
+
+        String custid = customerDetailVal[0].getText();
+        DefaultTableModel bModel = (DefaultTableModel) onlineOrderProducts.getModel();
+        ReturnCustOrders co = new ReturnCustOrders(Integer.parseInt(custid));
+        for (int j=1; j<=co.getCustorders().size() ; j++){
+            ReturnOrderedProduct p = new ReturnOrderedProduct(j);
+            bModel.addRow(new Object[]{p.getBarcode(), p.getBrand(), p.getName(),p.getQty(),p.getCategory()});
+        }
 
         for(int i=0;i<customerDetailLbl.length;i++){
             customerDetails.add(customerDetailLbl[i]);
@@ -265,8 +265,21 @@ public class OnlineOrderList {
                     UpdateQuant query = new UpdateQuant(name, brand, change);
                     UpdateOrderDB query2 = new UpdateOrderDB(Integer.parseInt(productDetailVal[0].getText()));
                     //log.info("Accessed server and database to update product details");
-
-                //bModel.removeRow();
+                    DefaultTableModel bModel = (DefaultTableModel)onlineOrderProducts.getModel();
+                    int bRow = onlineOrderProducts.getSelectedRow();
+                    bModel.removeRow(bRow);
+                    for (int i = 0; i < productDetailVal.length; i++) {
+                        productDetailVal[i].setText("");
+                    }
+                    int a = onlineOrderProducts.getRowCount();
+                    if(a==0){
+                        DefaultTableModel aModel = (DefaultTableModel)onlineOrderCustomers.getModel();
+                        int aRow = onlineOrderCustomers.getSelectedRow();
+                        aModel.removeRow(aRow);
+                        for (int i = 0; i < customerDetailVal.length; i++) {
+                            customerDetailVal[i].setText("");
+                        }
+                    }
             }
         });
 
